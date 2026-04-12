@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/24 17:20:15 by meelma            #+#    #+#             */
+/*   Updated: 2026/01/26 10:02:45 by meelma           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Harl.hpp"
+
+int main(int ac, char **av) {
+    
+    if (ac != 2) {
+        std::cout << "Invalid argument count" << std::endl;
+        return 1;
+    }
+    
+    Harl harl;
+    std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    int level = -1;
+    
+    for (int i = 0; i < 4; i++) {
+        if (av[1] == levels[i]) {
+            level = i;
+            break;
+        }
+    }
+
+    switch (level)
+    {
+        case 0:
+            std::cout << "[ DEBUG ]" << std::endl;
+            harl.complain("DEBUG");
+            std::cout << std::endl;
+
+        case 1:
+            std::cout << "[ INFO ]" << std::endl;
+            harl.complain("INFO");
+            std::cout << std::endl;
+
+        case 2:
+            std::cout << "[ WARNING ]" << std::endl;
+            harl.complain("WARNING");
+            std::cout << std::endl;
+            
+        case 3:
+            std::cout << "[ ERROR ]" << std::endl;
+            harl.complain("ERROR");
+            break;
+        
+        default:
+            std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+    }
+
+    return 0;
+}
