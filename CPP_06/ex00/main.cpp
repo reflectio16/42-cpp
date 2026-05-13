@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 14:45:33 by meelma            #+#    #+#             */
-/*   Updated: 2026/05/13 16:35:28 by meelma           ###   ########.fr       */
+/*   Created: 2026/05/13 15:54:29 by meelma            #+#    #+#             */
+/*   Updated: 2026/05/13 16:33:42 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#include "ScalarConverter.hpp"
+#include <iostream>
 
-#include <string>
-
-class ScalarConverter {
-    private:
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter&);
-        ScalarConverter& operator=(const ScalarConverter&);
-        ~ScalarConverter();
-
-    public:
-        static void convert(const std::string& literal);
+int main(int ac, char** av) {
     
-};
-
-
-#endif
+    if (ac != 2) {
+        std::cout << "Usage: ./convert <literal>" << std::endl;
+        return 1;
+    }
+    ScalarConverter::convert(av[1]);
+    return 0;
+}
