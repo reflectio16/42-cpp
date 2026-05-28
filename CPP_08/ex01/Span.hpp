@@ -6,7 +6,7 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 16:06:48 by meelma            #+#    #+#             */
-/*   Updated: 2026/05/28 10:57:15 by meelma           ###   ########.fr       */
+/*   Updated: 2026/05/28 17:09:21 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,5 @@ void Span::addNumbers(InputIterator begin, InputIterator end) {
     _numbers.insert(_numbers.end(), begin, end);
     
 }
-
-
-
 
 #endif
