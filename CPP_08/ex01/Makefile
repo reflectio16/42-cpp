@@ -6,7 +6,7 @@
 #    By: meelma <meelma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/27 16:05:29 by meelma            #+#    #+#              #
-#    Updated: 2026/05/27 16:06:24 by meelma           ###   ########.fr        #
+#    Updated: 2026/05/28 11:50:28 by meelma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CXX     = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS    = main.cpp Span.cpp
 OBJS    = $(SRCS:.cpp=.o)
+HEADERS	= Span.hpp
 
 all: $(NAME)
 
@@ -22,7 +23,7 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 	@echo "Succesfully built $(NAME)"
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

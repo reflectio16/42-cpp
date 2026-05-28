@@ -6,7 +6,7 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 16:06:48 by meelma            #+#    #+#             */
-/*   Updated: 2026/05/27 18:01:00 by meelma           ###   ########.fr       */
+/*   Updated: 2026/05/28 10:57:15 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <exception>
 #include <vector>
+#include <iterator>
 
 class Span {
     public:
@@ -48,7 +49,15 @@ class Span {
         
 };
 
-
+template <typename InputIterator>
+void Span::addNumbers(InputIterator begin, InputIterator end) {
+    unsigned int range_len = std::distance(begin, end);
+    if (_numbers.size() + range_len >_maxSize)
+        throw FullSpanException();
+    _numbers.reserve(_numbers.size() + range_len);
+    _numbers.insert(_numbers.end(), begin, end);
+    
+}
 
 
 
