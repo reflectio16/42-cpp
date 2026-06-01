@@ -6,7 +6,7 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:04:15 by meelma            #+#    #+#             */
-/*   Updated: 2026/05/28 16:57:20 by meelma           ###   ########.fr       */
+/*   Updated: 2026/06/01 18:36:44 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ int main() {
         rev_it++;
     }
     
+    std::cout << std::endl;
+    std::cout << " === Const iterator === " << std::endl;
+    const MutantStack<int> cmstack(mstack);
+    MutantStack<int>::const_iterator cit = cmstack.begin();
+    MutantStack<int>::const_iterator cite = cmstack.end();
+    while (cit != cite) {
+        std::cout << *cit << std::endl;
+        cit++;
+    }
+
+    std::cout << std::endl;
+    std::cout << " === Const Reverse iterator === " << std::endl;
+    MutantStack<int>::const_reverse_iterator crit = cmstack.rbegin();
+    MutantStack<int>::const_reverse_iterator crite = cmstack.rend();
+    while(crit != crite) {
+        std::cout << *crit << std::endl;
+        crit++;
+    }
+
     std::cout << std::endl;
     std::cout << " === === Test with std::list === === " << std::endl;
     
