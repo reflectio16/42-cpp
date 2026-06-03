@@ -6,7 +6,7 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:26:34 by meelma            #+#    #+#             */
-/*   Updated: 2026/06/02 19:32:02 by meelma           ###   ########.fr       */
+/*   Updated: 2026/06/03 16:47:08 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include <cerrno>
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -54,10 +55,30 @@ static bool isValidDate(const std::string& s) {
 
 /* static bool isValidValue() ==> TO DO
     with strtod + errno to handle 
+    - unparseable
     - negative / 
     - too-large /
-    - unparseable
-*/  
+    
+*/
+static bool isValidValue(const std::string& value_str, float& out, const std::string& line) {
+    char* end;
+    errno = 0;
+    double v = strtod(value_str.c_str(), &end);
+    if (end == value_str.c_str() || *end != '\0') {
+        std::cout << "Error: bad input => " << line << std::endl;
+        return false;
+    }
+    if (v < 0) {
+        std::cout << "Error: not a positive number. " << std::endl;
+        return false;
+    }
+    if (v > 1000 || errno == ERANGE) {
+        std::cout << "Error: too large a number. " << std::endl;
+        return false;
+    }
+    out = static_cast<float>(v);
+    return true;
+}
     
 void BitcoinExchange::loadDatabase(const std::string& path) {
     
@@ -102,15 +123,16 @@ void BitcoinExchange::processInput(const std::string& path) {
         }
         std::string value_str = line.substr(pos + 3);
         float value;
-        std::istringstream iss(value_str);
         
-         // Check point: isValidValue()
-         
+        if (!isValidValue(value_str, value, line))
+            continue;
+        /* 
+        std::istringstream iss(value_str);
         iss >> value;
         if (iss.fail()) {
             std::cout << "Error: bad input => " << line << "\n";
             continue;
-        }
+        }*/
         
         std::map<std::string, float>::const_iterator it = _db.lower_bound(date);
         if (it == _db.end() || it->first != date) {
