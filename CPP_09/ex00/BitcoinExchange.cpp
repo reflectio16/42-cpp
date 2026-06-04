@@ -6,7 +6,7 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 14:26:34 by meelma            #+#    #+#             */
-/*   Updated: 2026/06/03 16:47:08 by meelma           ###   ########.fr       */
+/*   Updated: 2026/06/04 11:11:08 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ static bool isValidDate(const std::string& s) {
     return true;
 }
 
-/* static bool isValidValue() ==> TO DO
-    with strtod + errno to handle 
-    - unparseable
-    - negative / 
-    - too-large /
-    
-*/
 static bool isValidValue(const std::string& value_str, float& out, const std::string& line) {
     char* end;
     errno = 0;
@@ -123,17 +116,8 @@ void BitcoinExchange::processInput(const std::string& path) {
         }
         std::string value_str = line.substr(pos + 3);
         float value;
-        
         if (!isValidValue(value_str, value, line))
             continue;
-        /* 
-        std::istringstream iss(value_str);
-        iss >> value;
-        if (iss.fail()) {
-            std::cout << "Error: bad input => " << line << "\n";
-            continue;
-        }*/
-        
         std::map<std::string, float>::const_iterator it = _db.lower_bound(date);
         if (it == _db.end() || it->first != date) {
             if (it == _db.begin()) {
