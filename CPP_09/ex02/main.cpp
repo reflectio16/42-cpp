@@ -6,12 +6,11 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:58:24 by meelma            #+#    #+#             */
-/*   Updated: 2026/06/05 16:10:19 by meelma           ###   ########.fr       */
+/*   Updated: 2026/06/09 17:23:53 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <cerrno>
 #include <iostream>
 
 int main (int ac, char** av) {
