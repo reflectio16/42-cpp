@@ -6,13 +6,14 @@
 /*   By: meelma <meelma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 12:27:41 by meelma            #+#    #+#             */
-/*   Updated: 2026/06/04 17:42:02 by meelma           ###   ########.fr       */
+/*   Updated: 2026/06/11 17:13:36 by meelma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 #include <stack>
 #include <cctype>
+#include <climits>
 
 RPN::RPN() {}
 
@@ -41,14 +42,17 @@ int RPN::evaluate(const std::string& expr) {
             int b = s.top(); s.pop();
             int a = s.top(); s.pop();
             
-            int result;
-            if (expr[i] == '+')         result = a + b;
-            else if (expr[i] == '-')    result = a - b;
-            else if (expr[i] == '*')    result = a * b;
+            long tmp;
+            if (expr[i] == '+')         tmp = static_cast<long>(a) + b;
+            else if (expr[i] == '-')    tmp = static_cast<long>(a) - b;
+            else if (expr[i] == '*')    tmp = static_cast<long>(a) * b;
             else {
                 if (b == 0) throw ErrorException();
-                result = a / b;
+                tmp = a / b;
             }
+            if (tmp < INT_MIN || tmp > INT_MAX)
+                throw ErrorException();
+            int result = static_cast<int>(tmp);
             s.push(result);
             continue;
         }
